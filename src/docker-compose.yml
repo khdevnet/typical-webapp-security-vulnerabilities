@@ -1,0 +1,23 @@
+version: '3'
+networks:
+  net:
+    driver: bridge
+services:
+  postgres:
+    image: "postgres"
+    environment:
+     - POSTGRES_PASSWORD=123456
+    networks:
+     - net
+    ports:
+     - "5433:5432"
+  products:
+    depends_on:
+      - "postgres"
+    build: .
+    environment:
+     - SW_ConnectionStrings__ProductDbContext=User ID=postgres;Password=123456;Server=sw_postgres_1;Port=5432;Database=sw_products;Pooling=true;
+    networks:
+     - net
+    ports:
+     - "8433:80" 
