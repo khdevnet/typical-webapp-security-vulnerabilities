@@ -18,3 +18,7 @@ In both cases, the attacker modifies the ‘id’ parameter value in their brows
 
 http://example.com/app/accountView?id=' or '1'='1
 This changes the meaning of both queries to return all the records from the accounts table. More dangerous attacks could modify or delete data, or even invoke stored procedures.
+
+
+## Resources
+* [OWASP Top Ten 2017](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_2017_Project)
