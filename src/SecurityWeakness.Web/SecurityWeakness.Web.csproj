@@ -9,4 +9,15 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SecurityWeakness.Domain\SecurityWeakness.Domain.csproj" />
+    <ProjectReference Include="..\SecurityWeakness.Infrastructure.SQL\SecurityWeakness.Infrastructure.SQL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\NotSecureProducts\Search.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,26 @@
+﻿@model SecurityWeakness.Web.Models.Products.IndexViewModel
+@{
+    ViewData["Title"] = "Not Secure Products";
+}
+<div class="col-md-3">
+    <h2>Filter</h2>
+    <form asp-controller="NotSecureProducts" asp-action="Search" method="get">
+        Query:
+        <input type="text" id="Name" name="Name" value=""><br>
+
+        <button type="submit">Search</button>
+
+    </form>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <h2>Products</h2>
+        <ul>
+            @foreach (var product in Model.Products)
+            {
+                <li>@product.Name</li>
+            }
+        </ul>
+    </div>
+
+</div>

@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace SecurityWeakness.Infrastructure.SQL.Migrations
 {
-    public partial class Init : Migration
+    public partial class CreateProducts : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,9 +28,11 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                 {
                     { 1, "R2-D2", 200m },
                     { 2, "Speeder", 300m },
-                    { 3, "BB-8", 400m },
-                    { 4, "Blaster", 700m },
-                    { 5, "Death star", 8000m }
+                    { 3, "Speeder2", 300m },
+                    { 4, "Speeder3", 300m },
+                    { 5, "BB-8", 400m },
+                    { 6, "Blaster", 700m },
+                    { 7, "Death star", 8000m }
                 });
         }
 

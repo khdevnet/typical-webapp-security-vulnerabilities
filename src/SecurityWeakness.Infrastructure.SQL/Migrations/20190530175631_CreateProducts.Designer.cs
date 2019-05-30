@@ -9,15 +9,15 @@ using SecurityWeakness.Infrastructure.SQL.Database;
 namespace SecurityWeakness.Infrastructure.SQL.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20181029175316_Init")]
-    partial class Init
+    [Migration("20190530175631_CreateProducts")]
+    partial class CreateProducts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("SecurityWeakness.Domain.Entities.Product", b =>
@@ -41,9 +41,11 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                     b.HasData(
                         new { Id = 1, Name = "R2-D2", Price = 200m },
                         new { Id = 2, Name = "Speeder", Price = 300m },
-                        new { Id = 3, Name = "BB-8", Price = 400m },
-                        new { Id = 4, Name = "Blaster", Price = 700m },
-                        new { Id = 5, Name = "Death star", Price = 8000m }
+                        new { Id = 3, Name = "Speeder2", Price = 300m },
+                        new { Id = 4, Name = "Speeder3", Price = 300m },
+                        new { Id = 5, Name = "BB-8", Price = 400m },
+                        new { Id = 6, Name = "Blaster", Price = 700m },
+                        new { Id = 7, Name = "Death star", Price = 8000m }
                     );
                 });
 #pragma warning restore 612, 618

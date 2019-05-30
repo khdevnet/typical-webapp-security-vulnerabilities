@@ -2,8 +2,8 @@
 .env
 .git
 .gitignore
-.vs
-.vscode
+*/.vs
+*/.vscode
 */bin
 */obj
 **/.toolstarget
