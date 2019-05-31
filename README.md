@@ -8,17 +8,37 @@ Injection can result in data loss, corruption, or disclosure to unauthorized par
 ### Example
 Scenario #1: An application uses untrusted data in the construction of the following vulnerable SQL call:
 
-```String query = "SELECT * FROM accounts WHERE custID='" + request.getParameter("id") + "'";```
+```var sql = "SELECT * FROM product WHERE sku='{sku}' LIMIT 1";```
 
-Scenario #2: Similarly, an application’s blind trust in frameworks may result in queries that are still vulnerable, (e.g. Hibernate Query Language (HQL)):
+Scenario #2: Similarly, an application’s blind trust in frameworks may result in queries that are still vulnerable, 
+(e.g. EF Core FromSql Method):
 
-```Query HQLQuery = session.createQuery("FROM accounts WHERE custID='" + request.getParameter("id") + "'");```
+```
+SecurityWeakness.Infrastructure.SQL.NotSecureProductSqlRepository:
 
-In both cases, the attacker modifies the ‘id’ parameter value in their browser to send: ' or '1'='1. For example:
+public Product GetSingleBySku(string sku)
+{
+    var sql = $"SELECT * FROM product WHERE sku='{sku}' LIMIT 1";
+    return context.Products.FromSql(sql).ToArray().Single();
+}
+```
 
-http://example.com/app/accountView?id=' or '1'='1
-This changes the meaning of both queries to return all the records from the accounts table. More dangerous attacks could modify or delete data, or even invoke stored procedures.
+In both cases, the attacker modifies the ‘sku’ parameter value in their browser to send:
 
+``` 
+http://localhost:62384/NotSecureProducts/Product?sku=p2';DELETE from product;SELECT '1
+```
 
+This changes the meaning of both queries to delete all the records from the product table. More dangerous attacks could modify or delete data, or even invoke stored procedures.
+
+### Secure Example
+Rewrite code using Linq Query, or use parameterization for raw SQL queries 
+```
+SecurityWeakness.Infrastructure.SQL.SecureProductSqlRepository:
+public Product GetSingleBySku(string sku)
+{
+    return context.Products.FromSql($"SELECT * FROM {TableName} WHERE sku={{0}} LIMIT 1", sku).ToArray().Single();
+}
+```
 ## Resources
 * [OWASP Top Ten 2017](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_2017_Project)
