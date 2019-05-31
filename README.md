@@ -32,6 +32,13 @@ http://localhost:62384/NotSecureProducts/Product?sku=p2';DELETE from product;SEL
 This changes the meaning of both queries to delete all the records from the product table. More dangerous attacks could modify or delete data, or even invoke stored procedures.
 
 ### Secure Example
-
+Rewrite code using Linq Query, always use parameterization for raw SQL queries 
+```
+SecurityWeakness.Infrastructure.SQL.SecureProductSqlRepository:
+public Product GetSingleBySku(string sku)
+{
+    return context.Products.FromSql($"SELECT * FROM {TableName} WHERE sku={{0}} LIMIT 1", sku).ToArray().Single();
+}
+```
 ## Resources
 * [OWASP Top Ten 2017](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_2017_Project)
