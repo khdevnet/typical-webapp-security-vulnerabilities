@@ -20,6 +20,7 @@ namespace SecurityWeakness.Web.Configurations
             using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 ProductDbContext context = serviceScope.ServiceProvider.GetRequiredService<ProductDbContext>();
+                context.Database.EnsureDeleted();
                 context.Database.Migrate();
             }
         }

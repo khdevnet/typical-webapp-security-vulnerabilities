@@ -1,0 +1,13 @@
+﻿@model SecurityWeakness.Domain.Entities.Product
+@{
+    ViewData["Title"] = Model.Name;
+}
+<div class="row">
+    <div class="col-md-3">
+        <h3>@Model.Name</h3>
+        <ul>
+            <li>Sku: @Model.Sku</li>
+            <li>Price: @Model.Price</li>
+        </ul>
+    </div>
+</div>

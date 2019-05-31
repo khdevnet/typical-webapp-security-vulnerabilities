@@ -32,18 +32,23 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnName("price");
 
+                    b.Property<string>("Sku")
+                        .IsRequired()
+                        .HasColumnName("sku")
+                        .HasMaxLength(255);
+
                     b.HasKey("Id");
 
                     b.ToTable("product");
 
                     b.HasData(
-                        new { Id = 1, Name = "R2-D2", Price = 200m },
-                        new { Id = 2, Name = "Speeder", Price = 300m },
-                        new { Id = 3, Name = "Speeder2", Price = 300m },
-                        new { Id = 4, Name = "Speeder3", Price = 300m },
-                        new { Id = 5, Name = "BB-8", Price = 400m },
-                        new { Id = 6, Name = "Blaster", Price = 700m },
-                        new { Id = 7, Name = "Death star", Price = 8000m }
+                        new { Id = 1, Name = "R2-D2", Price = 200m, Sku = "p1" },
+                        new { Id = 2, Name = "Speeder", Price = 300m, Sku = "p2" },
+                        new { Id = 3, Name = "Speeder2", Price = 500m, Sku = "p3" },
+                        new { Id = 4, Name = "Speeder3", Price = 600m, Sku = "p4" },
+                        new { Id = 5, Name = "BB-8", Price = 400m, Sku = "p5" },
+                        new { Id = 6, Name = "Blaster", Price = 700m, Sku = "p6" },
+                        new { Id = 7, Name = "Death star", Price = 8000m, Sku = "p7" }
                     );
                 });
 #pragma warning restore 612, 618

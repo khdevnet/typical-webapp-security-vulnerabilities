@@ -1,0 +1,16 @@
+﻿@model SecurityWeakness.Web.Models.Products.IndexViewModel
+@{
+    ViewData["Title"] = "Secure Products";
+}
+<div class="row">
+    <div class="col-md-3">
+        <h2>Products</h2>
+        <ul>
+            @foreach (var product in Model.Products)
+            {
+                <li><a asp-area="" asp-controller="SecureProducts" asp-action="Product" asp-route-sku="@product.Sku" >@product.Name</a></li>
+            }
+        </ul>
+    </div>
+
+</div>

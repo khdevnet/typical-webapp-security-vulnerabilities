@@ -7,12 +7,12 @@ using SecurityWeakness.Infrastructure.SQL.Database;
 
 namespace SecurityWeakness.Infrastructure.SQL.Repositories
 {
-    internal class ProductSqlRepository : IProductSqlRepository
+    internal class SecureProductSqlRepository : ISecureProductSqlRepository
     {
         private readonly ProductDbContext context;
         private readonly string TableName;
 
-        public ProductSqlRepository(ProductDbContext context)
+        public SecureProductSqlRepository(ProductDbContext context)
         {
             this.context = context;
             var relational = context.Model.FindEntityType(typeof(Product)).Relational();
@@ -21,12 +21,13 @@ namespace SecurityWeakness.Infrastructure.SQL.Repositories
 
         public IEnumerable<Product> Get()
         {
-            return context.Products.FromSql(string.Format("SELECT * FROM {0}", TableName)).ToList();
+            var sql = string.Format($"SELECT * FROM {TableName}");
+            return context.Products.FromSql(sql).ToList();
         }
 
-        public IEnumerable<Product> GetByName(string name)
+        public Product GetSingleBySku(string sku)
         {
-            return context.Products.FromSql(string.Format("SELECT * FROM {0} WHERE name={1}", TableName, name)).ToList();
+            return context.Products.FromSql($"SELECT * FROM {TableName} WHERE sku={{0}} LIMIT 1", sku).ToArray().Single();
         }
     }
 }

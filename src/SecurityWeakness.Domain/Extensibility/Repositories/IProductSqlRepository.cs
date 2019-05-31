@@ -7,6 +7,14 @@ namespace SecurityWeakness.Domain.Extensibility.Repositories
     {
         IEnumerable<Product> Get();
 
-        IEnumerable<Product> GetByName(string name);
+        Product GetSingleBySku(string sku);
+    }
+
+    public interface INotSecureProductSqlRepository : IProductSqlRepository
+    {
+    }
+
+    public interface ISecureProductSqlRepository : IProductSqlRepository
+    {
     }
 }

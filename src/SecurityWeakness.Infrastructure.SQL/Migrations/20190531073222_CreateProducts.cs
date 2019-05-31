@@ -13,6 +13,7 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    sku = table.Column<string>(maxLength: 255, nullable: false),
                     name = table.Column<string>(maxLength: 255, nullable: false),
                     price = table.Column<decimal>(nullable: false)
                 },
@@ -23,16 +24,16 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
 
             migrationBuilder.InsertData(
                 table: "product",
-                columns: new[] { "id", "name", "price" },
+                columns: new[] { "id", "name", "price", "sku" },
                 values: new object[,]
                 {
-                    { 1, "R2-D2", 200m },
-                    { 2, "Speeder", 300m },
-                    { 3, "Speeder2", 300m },
-                    { 4, "Speeder3", 300m },
-                    { 5, "BB-8", 400m },
-                    { 6, "Blaster", 700m },
-                    { 7, "Death star", 8000m }
+                    { 1, "R2-D2", 200m, "p1" },
+                    { 2, "Speeder", 300m, "p2" },
+                    { 3, "Speeder2", 500m, "p3" },
+                    { 4, "Speeder3", 600m, "p4" },
+                    { 5, "BB-8", 400m, "p5" },
+                    { 6, "Blaster", 700m, "p6" },
+                    { 7, "Death star", 8000m, "p7" }
                 });
         }
 

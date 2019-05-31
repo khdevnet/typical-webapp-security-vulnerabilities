@@ -23,6 +23,12 @@ namespace SecurityWeakness.Infrastructure.SQL.Database
                 .IsRequired();
 
             modelBuilder.Entity<Product>()
+                .Property(p => p.Sku)
+                .HasColumnName("sku")
+                .HasMaxLength(255)
+                .IsRequired();
+
+            modelBuilder.Entity<Product>()
                 .Property(p => p.Price)
                 .HasColumnName("price")
                 .IsRequired();

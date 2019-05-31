@@ -2,9 +2,9 @@
 
 namespace SecurityWeakness.Web.Controllers
 {
-    public class NotSecureProductsController : ProductsControllerBase
+    public class SecureProductsController : ProductsControllerBase
     {
-        public NotSecureProductsController(INotSecureProductSqlRepository productSqlRepository)
+        public SecureProductsController(ISecureProductSqlRepository productSqlRepository)
             : base(productSqlRepository)
         {
         }

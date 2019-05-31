@@ -16,7 +16,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\NotSecureProducts\Search.cshtml">
+    <Content Update="Views\NotSecureProducts\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\NotSecureProducts\Product.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\SecureProducts\Product.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\SecureProducts\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>
