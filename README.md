@@ -3,9 +3,11 @@
 ### Security Weakness
 Injection flaws are very prevalent, particularly in legacy code. Injection vulnerabilities are often found in SQL, LDAP, XPath, or NoSQL queries, OS commands, XML parsers, SMTP headers, expression languages, and ORM queries.
 Injection flaws are easy to discover when examining code. Scanners and fuzzers can help attackers find injection flaws.
+
 ### Impacts
 Injection can result in data loss, corruption, or disclosure to unauthorized parties, loss of accountability, or denial of access. Injection can sometimes lead to complete host takeover.
-### Example
+
+### Sql Injection Example
 Scenario #1: An application uses untrusted data in the construction of the following vulnerable SQL call:
 
 ```var sql = "SELECT * FROM product WHERE sku='{sku}' LIMIT 1";```
