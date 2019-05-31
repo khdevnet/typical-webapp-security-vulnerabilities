@@ -32,7 +32,7 @@ http://localhost:62384/NotSecureProducts/Product?sku=p2';DELETE from product;SEL
 This changes the meaning of both queries to delete all the records from the product table. More dangerous attacks could modify or delete data, or even invoke stored procedures.
 
 ### Secure Example
-Rewrite code using Linq Query, always use parameterization for raw SQL queries 
+Rewrite code using Linq Query, or use parameterization for raw SQL queries 
 ```
 SecurityWeakness.Infrastructure.SQL.SecureProductSqlRepository:
 public Product GetSingleBySku(string sku)
