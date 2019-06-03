@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SecurityWeakness.Domain.Entities;
 
 namespace SecurityWeakness.Infrastructure.SQL.Database
 {
-    public class ProductDbContext : DbContext
+    public class ProductDbContext : IdentityDbContext
     {
         public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options)
         {

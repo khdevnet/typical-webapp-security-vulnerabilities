@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,9 +24,12 @@ namespace SecurityWeakness.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             string connectionString = Configuration.GetConnectionString(nameof(ProductDbContext));
 
             services.AddDbContext(connectionString);
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<ProductDbContext>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -55,10 +59,14 @@ namespace SecurityWeakness.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
