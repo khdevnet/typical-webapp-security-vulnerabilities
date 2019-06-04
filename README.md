@@ -66,5 +66,9 @@ This causes the victim’s session ID to be sent to the attacker’s website, al
 Note that attackers can also use XSS to defeat any automated CSRF defense the application might employ. See A8 for info on CSRF.
 
 ## Resources
+* [OWASP .NET](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/DotNet_Security_Cheat_Sheet.md)
+* [ASP.NET Core Security](https://docs.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-2.2)
 * [OWASP Top Ten 2017](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_2017_Project)
-* [Cross0Site Scripting (XSS)](https://blog.sucuri.net/2019/01/owasp-top-10-security-risks-part-iv.html)
+* [Cross Site Scripting (XSS)](https://blog.sucuri.net/2019/01/owasp-top-10-security-risks-part-iv.html)
+* [Cross Site Scripting (XSS) Asp net core](https://docs.microsoft.com/en-us/aspnet/core/security/cross-site-scripting?view=aspnetcore-2.2)
+
