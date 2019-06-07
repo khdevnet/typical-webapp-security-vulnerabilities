@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Humanizer;
 using Microsoft.AspNetCore.Identity;
@@ -16,15 +17,21 @@ namespace SecurityWeakness.Infrastructure.SQL.Database
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             ApplySnakeCaseNamingConventions(modelBuilder);
 
-            SeedUsers(modelBuilder);
+            modelBuilder.Entity<Product>()
+                .HasKey(x => x.Id);
 
-            SeedProducts(modelBuilder);
+            modelBuilder.Entity<Comment>()
+                .HasKey(x => x.Id);
+
+            SeedUsers(modelBuilder);
         }
 
         private static void SeedUsers(ModelBuilder modelBuilder)
@@ -51,22 +58,6 @@ namespace SecurityWeakness.Infrastructure.SQL.Database
             };
 
             users.ForEach(p => modelBuilder.Entity<IdentityUser>().HasData(p));
-        }
-
-        private static void SeedProducts(ModelBuilder modelBuilder)
-        {
-            var products = new List<Product>
-            {
-                new Product {Id = 1, Sku = "p1", Name = "R2-D2", Price = 200},
-                new Product {Id = 2, Sku = "p2", Name = "Speeder", Price = 300},
-                new Product {Id = 3, Sku = "p3", Name = "Speeder2", Price = 500},
-                new Product {Id = 4, Sku = "p4", Name = "Speeder3", Price = 600},
-                new Product {Id = 5, Sku = "p5", Name = "BB-8", Price = 400},
-                new Product {Id = 6, Sku = "p6", Name = "Blaster", Price = 700},
-                new Product {Id = 7, Sku = "p7", Name = "Death star", Price = 8000}
-            };
-
-            products.ForEach(p => modelBuilder.Entity<Product>().HasData(p));
         }
 
         private static void ApplySnakeCaseNamingConventions(ModelBuilder modelBuilder)

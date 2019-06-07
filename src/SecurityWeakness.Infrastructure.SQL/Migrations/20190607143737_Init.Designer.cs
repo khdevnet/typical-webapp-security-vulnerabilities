@@ -10,7 +10,7 @@ using SecurityWeakness.Infrastructure.SQL.Database;
 namespace SecurityWeakness.Infrastructure.SQL.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20190604082735_Init")]
+    [Migration("20190607143737_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -223,11 +223,36 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                     b.ToTable("asp_net_user_token");
                 });
 
+            modelBuilder.Entity("SecurityWeakness.Domain.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnName("product_id");
+
+                    b.Property<string>("Text")
+                        .HasColumnName("text");
+
+                    b.Property<string>("UserEmail")
+                        .HasColumnName("user_email");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("comment");
+                });
+
             modelBuilder.Entity("SecurityWeakness.Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id");
+
+                    b.Property<string>("Description")
+                        .HasColumnName("description");
 
                     b.Property<string>("Name")
                         .HasColumnName("name");
@@ -241,16 +266,6 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("product");
-
-                    b.HasData(
-                        new { Id = 1, Name = "R2-D2", Price = 200m, Sku = "p1" },
-                        new { Id = 2, Name = "Speeder", Price = 300m, Sku = "p2" },
-                        new { Id = 3, Name = "Speeder2", Price = 500m, Sku = "p3" },
-                        new { Id = 4, Name = "Speeder3", Price = 600m, Sku = "p4" },
-                        new { Id = 5, Name = "BB-8", Price = 400m, Sku = "p5" },
-                        new { Id = 6, Name = "Blaster", Price = 700m, Sku = "p6" },
-                        new { Id = 7, Name = "Death star", Price = 8000m, Sku = "p7" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -295,6 +310,14 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SecurityWeakness.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("SecurityWeakness.Domain.Entities.Product", "Product")
+                        .WithMany("Comments")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecurityWeakness.Domain.Entities;
@@ -7,6 +8,7 @@ using SecurityWeakness.Infrastructure.SQL.Database;
 
 namespace SecurityWeakness.Web.Controllers
 {
+    [Authorize]
     public class AdminProductsController : Controller
     {
         private readonly ProductDbContext _context;
@@ -51,7 +53,7 @@ namespace SecurityWeakness.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Sku,Name,Price")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Sku,Name,Description,Price")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +85,7 @@ namespace SecurityWeakness.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Sku,Name,Price")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Sku,Name,Description,Price")] Product product)
         {
             if (id != product.Id)
             {

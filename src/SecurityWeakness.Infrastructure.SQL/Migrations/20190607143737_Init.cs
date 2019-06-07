@@ -55,6 +55,7 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     sku = table.Column<string>(nullable: true),
                     name = table.Column<string>(nullable: true),
+                    description = table.Column<string>(nullable: true),
                     price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
@@ -168,24 +169,31 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "comment",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    product_id = table.Column<int>(nullable: false),
+                    user_email = table.Column<string>(nullable: true),
+                    text = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_comment", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_comment_product_product_id",
+                        column: x => x.product_id,
+                        principalTable: "product",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "asp_net_user",
                 columns: new[] { "id", "access_failed_count", "concurrency_stamp", "email", "email_confirmed", "lockout_enabled", "lockout_end", "normalized_email", "normalized_user_name", "password_hash", "phone_number", "phone_number_confirmed", "security_stamp", "two_factor_enabled", "user_name" },
                 values: new object[] { "0bb4e8c9-a044-4340-a052-ce9eb50ed1b5", 0, "e35570ee-8866-45d5-9106-8b59c5101eba", "admin@gmail.com", false, true, null, null, "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEC63d4qwalNk5geOuxz/wlElCED7jk1I/D0J9xm1Lci++VIJrUy89DDmf4qx69CdRw==", null, false, "VTFL6GT56KFZCCX2XI6SMNUIQU6IGUV4", false, "admin@gmail.com" });
-
-            migrationBuilder.InsertData(
-                table: "product",
-                columns: new[] { "id", "name", "price", "sku" },
-                values: new object[,]
-                {
-                    { 1, "R2-D2", 200m, "p1" },
-                    { 2, "Speeder", 300m, "p2" },
-                    { 3, "Speeder2", 500m, "p3" },
-                    { 4, "Speeder3", 600m, "p4" },
-                    { 5, "BB-8", 400m, "p5" },
-                    { 6, "Blaster", 700m, "p6" },
-                    { 7, "Death star", 8000m, "p7" }
-                });
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -223,6 +231,11 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                 name: "IX_asp_net_user_role_role_id",
                 table: "asp_net_user_role",
                 column: "role_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_comment_product_id",
+                table: "comment",
+                column: "product_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -243,13 +256,16 @@ namespace SecurityWeakness.Infrastructure.SQL.Migrations
                 name: "asp_net_user_token");
 
             migrationBuilder.DropTable(
-                name: "product");
+                name: "comment");
 
             migrationBuilder.DropTable(
                 name: "asp_net_role");
 
             migrationBuilder.DropTable(
                 name: "asp_net_user");
+
+            migrationBuilder.DropTable(
+                name: "product");
         }
     }
 }
