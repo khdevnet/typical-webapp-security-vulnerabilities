@@ -2,7 +2,7 @@
 
 namespace SecurityWeakness.Domain.Entities
 {
-    public class Product
+    public class Product : IEntity<int>
     {
         public int Id { get; set; }
 

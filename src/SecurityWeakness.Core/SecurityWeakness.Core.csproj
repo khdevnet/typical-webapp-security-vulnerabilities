@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+
   <ItemGroup>
+    <PackageReference Include="AntiXSS.NetStandard" Version="0.1.16" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.7" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SecurityWeakness.Core\SecurityWeakness.Core.csproj" />
-  </ItemGroup>
+
 </Project>

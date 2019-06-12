@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\Dockerfile = ..\Dockerfile
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecurityWeakness.Core", "SecurityWeakness.Core\SecurityWeakness.Core.csproj", "{6F4326A7-A78A-4105-A6AD-B670ED23A6F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{03501738-5A31-4471-A123-54D7D4692873}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03501738-5A31-4471-A123-54D7D4692873}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03501738-5A31-4471-A123-54D7D4692873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4326A7-A78A-4105-A6AD-B670ED23A6F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4326A7-A78A-4105-A6AD-B670ED23A6F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4326A7-A78A-4105-A6AD-B670ED23A6F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4326A7-A78A-4105-A6AD-B670ED23A6F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

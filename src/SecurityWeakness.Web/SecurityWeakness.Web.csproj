@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SecurityWeakness.Core\SecurityWeakness.Core.csproj" />
     <ProjectReference Include="..\SecurityWeakness.Domain\SecurityWeakness.Domain.csproj" />
     <ProjectReference Include="..\SecurityWeakness.Infrastructure.SQL\SecurityWeakness.Infrastructure.SQL.csproj" />
   </ItemGroup>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SecurityWeakness.Domain.Entities;
@@ -8,20 +7,18 @@ using SecurityWeakness.Infrastructure.SQL.Database;
 
 namespace SecurityWeakness.Infrastructure.SQL.Repositories
 {
-    internal class NotSecureProductSqlRepository : INotSecureProductSqlRepository
+    internal class NotSecureProductRepository : ProductRepositoryBase, INotSecureProductRepository
     {
         private readonly ProductDbContext context;
         private readonly string ProductTableName;
-        private readonly string CommentTableName;
 
-        public NotSecureProductSqlRepository(ProductDbContext context)
+        public NotSecureProductRepository(ProductDbContext context) : base(context)
         {
             this.context = context;
             ProductTableName = GetTableName<Product>(context);
-            CommentTableName = GetTableName<Comment>(context);
         }
 
-        public IEnumerable<Product> Get()
+        public new IEnumerable<Product> Get()
         {
             var sql = string.Format($"SELECT * FROM {ProductTableName}");
             return context.Products.FromSql(sql).ToList();
@@ -34,17 +31,6 @@ namespace SecurityWeakness.Infrastructure.SQL.Repositories
             product.Comments = GetComments(product.Id).ToArray();
 
             return product;
-        }
-
-        private IEnumerable<Comment> GetComments(int productId)
-        {
-            var sql = $"SELECT * FROM {CommentTableName} WHERE product_id={productId}";
-            return context.Comments.FromSql(sql).ToList();
-        }
-
-        private string GetTableName<TEntity>(ProductDbContext context)
-        {
-            return context.Model.FindEntityType(typeof(TEntity)).Relational().TableName;
         }
     }
 }

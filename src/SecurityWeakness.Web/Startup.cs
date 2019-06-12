@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SecurityWeakness.Core;
+using SecurityWeakness.Domain;
 using SecurityWeakness.Infrastructure.SQL;
 using SecurityWeakness.Infrastructure.SQL.Database;
 using SecurityWeakness.Web.Configurations;
@@ -24,7 +26,6 @@ namespace SecurityWeakness.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             string connectionString = Configuration.GetConnectionString(nameof(ProductDbContext));
 
             services.AddDbContext(connectionString);
@@ -44,6 +45,8 @@ namespace SecurityWeakness.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            builder.RegisterModule<CoreAutofacModule>();
+            builder.RegisterModule<DomainAutofacModule>();
             builder.RegisterModule<SqlAutofacModule>();
         }
 
@@ -65,7 +68,7 @@ namespace SecurityWeakness.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            
+
             app.UseAuthentication();
 
             app.UseMvc(routes =>

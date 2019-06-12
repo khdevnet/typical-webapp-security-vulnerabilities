@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SecurityWeakness.Domain.Entities;
 using SecurityWeakness.Domain.Extensibility.Repositories;
 using SecurityWeakness.Infrastructure.SQL.Database;
 
 namespace SecurityWeakness.Infrastructure.SQL.Repositories
 {
     internal class CrudRepository<TEntity, TId> : ICrudRepository<TEntity, TId>
-        where TEntity : class
+        where TEntity : class, IEntity<TId>
     {
         private readonly ProductDbContext context;
 

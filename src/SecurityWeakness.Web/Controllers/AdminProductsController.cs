@@ -1,39 +1,38 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecurityWeakness.Domain.Entities;
-using SecurityWeakness.Infrastructure.SQL.Database;
+using SecurityWeakness.Domain.Extensibility.Services;
 
 namespace SecurityWeakness.Web.Controllers
 {
     [Authorize]
     public class AdminProductsController : Controller
     {
-        private readonly ProductDbContext _context;
+        private readonly INotSecureProductService _productService;
 
-        public AdminProductsController(ProductDbContext context)
+        public AdminProductsController(INotSecureProductService productService)
         {
-            _context = context;
+            _productService = productService;
         }
 
         // GET: AdminProducts
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Products.ToListAsync());
+            return View(_productService.Get());
         }
 
         // GET: AdminProducts/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = _productService.Get()
+                .FirstOrDefault(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -53,26 +52,25 @@ namespace SecurityWeakness.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Sku,Name,Description,Price")] Product product)
+        public IActionResult Create([Bind("Id,Sku,Name,Description,Price")] Product product)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                _productService.Add(product);
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
         }
 
         // GET: AdminProducts/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = _productService.Get().FirstOrDefault(x => x.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -85,7 +83,7 @@ namespace SecurityWeakness.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Sku,Name,Description,Price")] Product product)
+        public IActionResult Edit(int id, [Bind("Id,Sku,Name,Description,Price")] Product product)
         {
             if (id != product.Id)
             {
@@ -96,8 +94,7 @@ namespace SecurityWeakness.Web.Controllers
             {
                 try
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    _productService.Update(product);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,15 +113,15 @@ namespace SecurityWeakness.Web.Controllers
         }
 
         // GET: AdminProducts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = _productService.Get()
+                .FirstOrDefault(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -136,17 +133,17 @@ namespace SecurityWeakness.Web.Controllers
         // POST: AdminProducts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+            var product = _productService.Get()
+                .FirstOrDefault(m => m.Id == id);
+            _productService.Delete(product);
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _productService.Get().Any(e => e.Id == id);
         }
     }
 }

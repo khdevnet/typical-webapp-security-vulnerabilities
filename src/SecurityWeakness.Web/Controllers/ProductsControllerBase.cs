@@ -1,30 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SecurityWeakness.Domain.Entities;
-using SecurityWeakness.Domain.Extensibility.Repositories;
+using SecurityWeakness.Domain.Extensibility.Services;
 using SecurityWeakness.Web.Models.Products;
 
 namespace SecurityWeakness.Web.Controllers
 {
     public abstract class ProductsControllerBase : Controller
     {
-        protected readonly IProductSqlRepository ProductSqlRepository;
-        protected readonly ICrudRepository<Comment, int> CommentRepository;
+        protected readonly IProductService ProductService;
 
-        protected ProductsControllerBase(IProductSqlRepository productSqlRepository, ICrudRepository<Comment, int> commentRepository)
+        protected ProductsControllerBase(IProductService productService)
         {
-            ProductSqlRepository = productSqlRepository;
-            CommentRepository = commentRepository;
+            ProductService = productService;
         }
 
         public IActionResult Index()
         {
-            return View(new IndexViewModel { Products = ProductSqlRepository.Get() });
+            return View(new IndexViewModel { Products = ProductService.Get() });
         }
 
         [HttpGet]
         public IActionResult Product(string sku)
         {
-            return View(ProductSqlRepository.GetSingleBySku(sku));
+            return View(ProductService.GetSingleBySku(sku));
         }
 
         [HttpPost]
@@ -32,9 +30,8 @@ namespace SecurityWeakness.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                CommentRepository.Add(new Comment
+                ProductService.AddComment(comment.ProductId, new Comment
                 {
-                    ProductId = comment.ProductId,
                     Text = comment.Text,
                     UserEmail = comment.UserEmail
                 });

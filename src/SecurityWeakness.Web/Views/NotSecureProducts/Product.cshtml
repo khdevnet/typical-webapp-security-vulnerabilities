@@ -8,6 +8,12 @@
         <div>
             <p><strong>Sku:</strong> @Model.Sku</p>
             <p><strong>Price:</strong> @Model.Price</p>
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+                <p><strong>Description:</strong></p>
+
+                <p> @Model.Description</p>
+            }
         </div>
     </div>
     @if (Model.Comments != null)
@@ -21,6 +27,7 @@
                     <label for="staticEmail2" class="sr-only">Email</label>
                     <input name="UserEmail" type="text" class="form-control" id="staticEmail2" value="palpatine@deathstar.com">
                 </div>
+
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Text</label>
                     <textarea name="Text" class="form-control" id="exampleFormControlTextarea1" rows="3">
@@ -34,7 +41,7 @@
             <ul>
                 @foreach (var comment in Model.Comments)
                 {
-                    <li><strong>@comment.UserEmail</strong> @comment.Text</li>
+                    <li><strong>@comment.UserEmail</strong> @Html.Raw(comment.Text)</li>
                 }
             </ul>
         </div>

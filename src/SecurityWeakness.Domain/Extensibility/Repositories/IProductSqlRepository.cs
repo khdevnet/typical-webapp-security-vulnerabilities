@@ -1,20 +1,10 @@
-﻿using System.Collections.Generic;
-using SecurityWeakness.Domain.Entities;
-
-namespace SecurityWeakness.Domain.Extensibility.Repositories
+﻿namespace SecurityWeakness.Domain.Extensibility.Repositories
 {
-    public interface IProductSqlRepository
-    {
-        IEnumerable<Product> Get();
-
-        Product GetSingleBySku(string sku);
-    }
-
-    public interface INotSecureProductSqlRepository : IProductSqlRepository
+    public interface INotSecureProductRepository : IProductRepository
     {
     }
 
-    public interface ISecureProductSqlRepository : IProductSqlRepository
+    public interface ISecureProductRepository : IProductRepository
     {
     }
 }

@@ -12,8 +12,8 @@ namespace SecurityWeakness.Infrastructure.SQL
             builder.RegisterType<CrudRepository<Product, int>>().As<ICrudRepository<Product, int>>();
             builder.RegisterType<CrudRepository<Comment, int>>().As<ICrudRepository<Comment, int>>();
 
-            builder.RegisterType<NotSecureProductSqlRepository>().As<INotSecureProductSqlRepository>();
-            builder.RegisterType<SecureProductSqlRepository>().As<ISecureProductSqlRepository>();
+            builder.RegisterType<NotSecureProductRepository>().As<INotSecureProductRepository>();
+            builder.RegisterType<SecureProductRepository>().As<ISecureProductRepository>();
         }
     }
 }

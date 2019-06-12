@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using SecurityWeakness.Domain.Entities;
 
 namespace SecurityWeakness.Domain.Extensibility.Repositories
 {
-    public interface ICrudRepository<TEntity, TId> where TEntity : class
+    public interface ICrudRepository<TEntity, TId> where TEntity : class, IEntity<TId>
     {
         TEntity Get(TId id);
 

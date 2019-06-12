@@ -2,7 +2,7 @@
 
 namespace SecurityWeakness.Domain.Entities
 {
-    public class Comment
+    public class Comment : IEntity<int>
     {
         public int Id { get; set; }
 
