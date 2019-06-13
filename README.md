@@ -4,6 +4,10 @@ Injection flaws are very prevalent, particularly in legacy code. Injection vulne
 Injection flaws are easy to discover when examining code. Scanners and fuzzers can help attackers find injection flaws.
 Injection can result in data loss, corruption, or disclosure to unauthorized parties, loss of accountability, or denial of access. Injection can sometimes lead to complete host takeover.
 
+## Protection
+* use entity framework Linq Queries
+* don't set params directly into SQL string
+
 ### Sql Injection sample
 Scenario #1: An application uses untrusted data in the construction of the following vulnerable SQL call:
 
@@ -47,6 +51,11 @@ XSS is the most prevalent web application security flaw. XSS flaws occur when an
 Detection of most Server XSS flaws is fairly easy via testing or code analysis. Client XSS is very difficult to identify.
 
 Attackers can execute scripts in a victim’s browser to hijack user sessions, deface web sites, insert hostile content, redirect users, hijack the user’s browser using malware, etc.
+
+## Protection
+* protect web inputs with HTML sanitizers
+* remove un secure htmltags (style,script etc) before save in database
+* protect cookies with Secure and Http only attributes in http header
 
 ### Xss Attack sample
 * Hijack a user’s session
