@@ -25,6 +25,16 @@ namespace SecurityWeakness.Infrastructure.SQL.Repositories
             context.SaveChanges();
         }
 
+        public void DeleteComment(int productId, int commentId)
+        {
+            var comment = context.Comments.FirstOrDefault(c => c.ProductId == productId && c.Id == commentId);
+            if (comment != null)
+            {
+                context.Comments.Remove(comment);
+                context.SaveChanges();
+            }
+        }
+
         public Product Update(Product product)
         {
             var pu = Get(product.Id);

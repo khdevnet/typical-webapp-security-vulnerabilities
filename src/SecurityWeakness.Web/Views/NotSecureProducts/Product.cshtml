@@ -1,4 +1,9 @@
-﻿@model SecurityWeakness.Domain.Entities.Product
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model SecurityWeakness.Domain.Entities.Product
+
 @{
     ViewData["Title"] = Model.Name;
 }
@@ -41,7 +46,21 @@
             <ul>
                 @foreach (var comment in Model.Comments)
                 {
-                    <li><strong>@comment.UserEmail</strong> @Html.Raw(comment.Text)</li>
+                    <li>
+
+                        <strong>@comment.UserEmail</strong> @Html.Raw(comment.Text)
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <form asp-action="DeleteComment" class="form-inline" style="display:inline">
+                                @Html.Hidden("Sku", Model.Sku)
+                                @Html.Hidden("ProductId", Model.Id)
+                                @Html.Hidden("CommentId", comment.Id)
+
+                                <button type="submit" class="btn btn-danger mb-2 btn-sm">X</button>
+                            </form>
+                        }
+                    </li>
                 }
             </ul>
         </div>

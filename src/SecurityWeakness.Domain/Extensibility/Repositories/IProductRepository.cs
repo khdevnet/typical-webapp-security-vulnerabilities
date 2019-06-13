@@ -8,6 +8,8 @@ namespace SecurityWeakness.Domain.Extensibility.Repositories
 
         void AddComment(int productId, Comment comment);
 
+        void DeleteComment(int productId, int commentId);
+
         Product GetSingleBySku(string sku);
     }
 }

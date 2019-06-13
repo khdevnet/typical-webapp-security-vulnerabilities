@@ -1,4 +1,5 @@
-﻿using SecurityWeakness.Domain.Extensibility.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using SecurityWeakness.Domain.Extensibility.Services;
 
 namespace SecurityWeakness.Web.Controllers
 {

@@ -15,6 +15,8 @@ namespace SecurityWeakness.Domain.Extensibility.Services
 
         void AddComment(int productId, Comment comment);
 
+        void DeleteComment(int productId, int commentId);
+
         IEnumerable<Product> Get();
     }
 

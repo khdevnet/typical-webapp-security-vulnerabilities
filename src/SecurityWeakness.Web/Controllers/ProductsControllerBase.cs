@@ -39,5 +39,14 @@ namespace SecurityWeakness.Web.Controllers
 
             return RedirectToAction(nameof(Product), new { sku });
         }
+
+
+        [HttpPost]
+        public IActionResult DeleteComment(string sku, int productId, int commentId)
+        {
+            ProductService.DeleteComment(productId, commentId);
+
+            return RedirectToAction(nameof(Product), new { sku });
+        }
     }
 }

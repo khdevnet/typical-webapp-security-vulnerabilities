@@ -23,6 +23,11 @@ namespace SecurityWeakness.Domain.Services
             _productRepository.AddComment(productId, comment);
         }
 
+        public void DeleteComment(int productId, int commentId)
+        {
+            _productRepository.DeleteComment(productId, commentId);
+        }
+
         public void Delete(Product product)
         {
             _productRepository.Delete(product.Id);
