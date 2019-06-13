@@ -4,7 +4,7 @@ Injection flaws are very prevalent, particularly in legacy code. Injection vulne
 Injection flaws are easy to discover when examining code. Scanners and fuzzers can help attackers find injection flaws.
 Injection can result in data loss, corruption, or disclosure to unauthorized parties, loss of accountability, or denial of access. Injection can sometimes lead to complete host takeover.
 
-## Protection
+### Protection
 * use entity framework Linq Queries
 * don't set params directly into SQL string
 
@@ -44,6 +44,8 @@ public Product GetSingleBySku(string sku)
 }
 ```
 
+## Broken Authentication and Session Management
+
 ## Cross-Site Scripting (XSS)
 Cross Site Scripting (XSS) is a widespread vulnerability that affects many web applications. XSS attacks consist of injecting malicious client-side scripts into a website and using the website as a propagation method.
 XSS is the most prevalent web application security flaw. XSS flaws occur when an application includes user supplied data in a page sent to the browser without properly validating or escaping that content. There are two different types of XSS flaws: 1) Stored and 2) Reflected, and each of these can occur on the a) Server or b) on the Client.
@@ -52,7 +54,7 @@ Detection of most Server XSS flaws is fairly easy via testing or code analysis. 
 
 Attackers can execute scripts in a victim’s browser to hijack user sessions, deface web sites, insert hostile content, redirect users, hijack the user’s browser using malware, etc.
 
-## Protection
+### Protection
 * protect web inputs with HTML sanitizers
 * remove un secure htmltags (style,script etc) before save in database
 * protect cookies with Secure and Http only attributes in http header
@@ -96,6 +98,13 @@ XSS can also be used to inject a form into the vulnerable page and use this form
 In this attack scenario we will inject a JavaScript keylogger into the vulnerable web page and we will capture all the key strokes of the user within the current page.
 
 First of all, we will create a separate JavaScript file and we will host it on the attacker controlled server. We need this file because the payload is too big to be inserted in the URL and we avoid encoding and escaping errors
+
+
+## Broken Access Control
+## Security Misconfiguration
+## Sensitive Data Exposure
+## Cross-Site Request Forgery (CSRF)
+## Using Components with Known Vulnerabilities
 
 ## Resources
 * [OWASP .NET](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/DotNet_Security_Cheat_Sheet.md)
