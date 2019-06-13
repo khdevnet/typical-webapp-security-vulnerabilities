@@ -1,10 +1,7 @@
 # Typical web app security vulnerabilities
 ## Injection
-### Security Weakness
 Injection flaws are very prevalent, particularly in legacy code. Injection vulnerabilities are often found in SQL, LDAP, XPath, or NoSQL queries, OS commands, XML parsers, SMTP headers, expression languages, and ORM queries.
 Injection flaws are easy to discover when examining code. Scanners and fuzzers can help attackers find injection flaws.
-
-### Impacts
 Injection can result in data loss, corruption, or disclosure to unauthorized parties, loss of accountability, or denial of access. Injection can sometimes lead to complete host takeover.
 
 ### Sql Injection sample
@@ -44,13 +41,11 @@ public Product GetSingleBySku(string sku)
 ```
 
 ## Cross-Site Scripting (XSS)
-### Security Weakness
 Cross Site Scripting (XSS) is a widespread vulnerability that affects many web applications. XSS attacks consist of injecting malicious client-side scripts into a website and using the website as a propagation method.
 XSS is the most prevalent web application security flaw. XSS flaws occur when an application includes user supplied data in a page sent to the browser without properly validating or escaping that content. There are two different types of XSS flaws: 1) Stored and 2) Reflected, and each of these can occur on the a) Server or b) on the Client.
 
 Detection of most Server XSS flaws is fairly easy via testing or code analysis. Client XSS is very difficult to identify.
 
-### Impacts
 Attackers can execute scripts in a victim’s browser to hijack user sessions, deface web sites, insert hostile content, redirect users, hijack the user’s browser using malware, etc.
 
 ### Xss Attack sample
