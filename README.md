@@ -99,12 +99,13 @@ In this attack scenario we will inject a JavaScript keylogger into the vulnerabl
 
 First of all, we will create a separate JavaScript file and we will host it on the attacker controlled server. We need this file because the payload is too big to be inserted in the URL and we avoid encoding and escaping errors
 
-
 ## Broken Access Control
 ## Security Misconfiguration
 ## Sensitive Data Exposure
 ## Cross-Site Request Forgery (CSRF)
 ## Using Components with Known Vulnerabilities
+Known vulnerabilities are vulnerabilities that were discovered in open source components and published in the NVD, security advisories or issue trackers. 
+From the moment of publication , a vulnerability can be exploited by hackers who find the documentation. According to OWASP, the problem of using components with known vulnerabilities is highly prevalent
 
 ## Resources
 * [OWASP .NET](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/DotNet_Security_Cheat_Sheet.md)
