@@ -1,6 +1,11 @@
 # Typical web app security vulnerabilities
-#Table of contents
 * [Injection](#injection)
+* [Broken Authentication and Session Management](#broken-authentication-and-session-management)
+* [Cross-Site Scripting (XSS)](#cross-site-scripting)
+* [Broken Access Control](#broken-access-control)
+* [Security Misconfiguration](#security-misconfiguration)
+* [Sensitive Data Exposure](#sensitive-data-exposure)
+* [Cross-Site Request Forgery (CSRF)](#cross-site-request-forgery)
 
 ## Injection
 Injection flaws are very prevalent, particularly in legacy code. Injection vulnerabilities are often found in SQL, LDAP, XPath, or NoSQL queries, OS commands, XML parsers, SMTP headers, expression languages, and ORM queries.
@@ -48,6 +53,27 @@ public Product GetSingleBySku(string sku)
 ```
 
 ## Broken Authentication and Session Management
+These types of weaknesses can allow an attacker to either capture or bypass the authentication methods that are used by a web application.
+
+* User authentication credentials are not protected when stored.
+* Predictable login credentials.
+* Session IDs are exposed in the URL (e.g., URL rewriting).
+* Session IDs are vulnerable to session fixation attacks.
+* Session value does not timeout or does not get invalidated after logout.
+* Session IDs are not rotated after successful login.
+* Passwords, session IDs, and other credentials are sent over unencrypted connections.
+The goal of an attack is to take over one or more accounts and for the attacker to get the same privileges as the attacked user.
+
+### Protection
+* Credentials should be protected: User authentication credentials should be protected when stored using hashing or encryption.
+* Do not expose session ID in the URL: Session IDs should not be exposed in the URL (e.g., URL rewriting).
+* Session IDs should timeout: User sessions or authentication tokens should be properly invalidated during logout.
+* Recreate session IDs: Session IDs should be recreated after successful login.
+* Do not send credentials over unencrypted connections: Passwords, session IDs, and other credentials should not be sent over unencrypted connections.
+* Password length: Minimum password length should be at least eight (8) characters long. Combining this length with complexity makes a password difficult to guess using a brute force attack.
+* Password complexity: Passwords should be a combination of alphanumeric characters. Alphanumeric characters consist of letters, numbers, punctuation marks, mathematical and other conventional symbols.
+* Username/Password Enumeration: Authentication failure responses should not indicate which part of the authentication data was incorrect. For example, instead of "Invalid username" or "Invalid password", just use "Invalid username and/or password" for both. Error responses must be truly identical in both display and source code.
+* Protection against brute force login: Enforce account disabling after an established number of invalid login attempts (e.g., five attempts is common). The account must be disabled for a period of time sufficient to discourage brute force guessing of credentials, but not so long as to allow for a denial-of-service attack to be performed.
 
 ## Cross-Site Scripting (XSS)
 Cross Site Scripting (XSS) is a widespread vulnerability that affects many web applications. XSS attacks consist of injecting malicious client-side scripts into a website and using the website as a propagation method.
@@ -84,7 +110,7 @@ This causes the victim’s session ID to be sent to the attacker’s website, al
 Note that attackers can also use XSS to defeat any automated CSRF defense the application might employ. See A8 for info on CSRF.
 
 * Perform unauthorized activities
-If the HTTPOnly cookie attribute is set, we cannot steal the cookies through JavaScript. However, using the XSS attack, we can still perform unauthorized actions inside the application on behalf of the user.
+If the HTTP Only cookie attribute is set, we cannot steal the cookies through JavaScript. However, using the XSS attack, we can still perform unauthorized actions inside the application on behalf of the user.
 ```
   <script>
 	var xhr = new XMLHttpRequest();
@@ -118,4 +144,5 @@ From the moment of publication , a vulnerability can be exploited by hackers who
 * [Cross Site Scripting (XSS) Asp net core](https://docs.microsoft.com/en-us/aspnet/core/security/cross-site-scripting?view=aspnetcore-2.2)
 * [xss-attacks-practical-scenarios](https://pentest-tools.com/blog/xss-attacks-practical-scenarios/)
 * [HTTP only, Secure cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
+* [broken-authentication-and-session-management](https://hdivsecurity.com/owasp-broken-authentication-and-session-management)
 
