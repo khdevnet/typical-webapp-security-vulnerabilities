@@ -1,5 +1,8 @@
 # Typical web app security vulnerabilities
-## Injection
+#Table of contents
+* [Injection](#injection)
+
+##Injection
 Injection flaws are very prevalent, particularly in legacy code. Injection vulnerabilities are often found in SQL, LDAP, XPath, or NoSQL queries, OS commands, XML parsers, SMTP headers, expression languages, and ORM queries.
 Injection flaws are easy to discover when examining code. Scanners and fuzzers can help attackers find injection flaws.
 Injection can result in data loss, corruption, or disclosure to unauthorized parties, loss of accountability, or denial of access. Injection can sometimes lead to complete host takeover.
