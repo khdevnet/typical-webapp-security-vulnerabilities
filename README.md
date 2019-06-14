@@ -100,10 +100,10 @@ The attacker modifies the 'CC' parameter in their browser to:
 
 * **asp.net core** protect it cookie from this kind of vulnerability, to enable cookie for document.cookie you need set ``` options.Cookie.HttpOnly=false```
 ```
-    services.ConfigureApplicationCookie(options =>
-    {
-        options.Cookie.HttpOnly = true;
-    });
+services.ConfigureApplicationCookie(options =>
+{
+	options.Cookie.HttpOnly = true;
+});
 ```
 
 This causes the victim’s session ID to be sent to the attacker’s website, allowing the attacker to hijack the user’s current session.
@@ -112,7 +112,7 @@ Note that attackers can also use XSS to defeat any automated CSRF defense the ap
 * Perform unauthorized activities
 If the HTTP Only cookie attribute is set, we cannot steal the cookies through JavaScript. However, using the XSS attack, we can still perform unauthorized actions inside the application on behalf of the user.
 ```
-  <script>
+<script>
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST','http://localhost:62384/NotSecureProducts/DeleteComment',true);
 	xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
