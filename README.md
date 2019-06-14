@@ -146,6 +146,24 @@ Access control is only effective if enforced in trusted server-side code or serv
 * Do not just hide functions.
 
 ## Security Misconfiguration
+Some common security misconfigurations include:
+
+* Unpatched systems
+* Using default account credentials (i.e., usernames and passwords)
+* Unprotected files and directories
+* Unused web pages
+* Poorly configured network devices
+
+### Protection
+* Developing a repeatable patching schedule
+* Keeping software up to date
+* Disabling default accounts
+* Encrypting data
+* Enforcing strong access controls
+* Provide admins with a repeatable process to avoid overlooking items
+* Set security settings in development frameworks to a secure value
+* Run security scanners and perform regular system audits
+
 ## Sensitive Data Exposure
 ## Cross-Site Request Forgery (CSRF)
 ## Using Components with Known Vulnerabilities
@@ -161,4 +179,5 @@ From the moment of publication , a vulnerability can be exploited by hackers who
 * [xss-attacks-practical-scenarios](https://pentest-tools.com/blog/xss-attacks-practical-scenarios/)
 * [HTTP only, Secure cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
 * [broken-authentication-and-session-management](https://hdivsecurity.com/owasp-broken-authentication-and-session-management)
+* [security-misconfigurations](https://resources.infosecinstitute.com/guide-preventing-common-security-misconfigurations/#gref)
 
