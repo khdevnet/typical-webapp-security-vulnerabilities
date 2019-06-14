@@ -5,7 +5,7 @@
 * [Broken Access Control](#broken-access-control)
 * [Security Misconfiguration](#security-misconfiguration)
 * [Sensitive Data Exposure](#sensitive-data-exposure)
-* [Cross-Site Request Forgery (CSRF)](#cross-site-request-forger-csrf)
+* [Cross-Site Request Forgery (CSRF)](#cross-site-request-forgery-csrf)
 
 ## Injection
 Injection flaws are very prevalent, particularly in legacy code. Injection vulnerabilities are often found in SQL, LDAP, XPath, or NoSQL queries, OS commands, XML parsers, SMTP headers, expression languages, and ORM queries.
