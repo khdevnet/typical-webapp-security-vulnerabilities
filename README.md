@@ -165,7 +165,28 @@ Some common security misconfigurations include:
 * Run security scanners and perform regular system audits
 
 ## Sensitive Data Exposure
+The first thing you have to determine is which data is sensitive enough to require extra protection. For example:
+* Banking information: account numbers, credit card numbers.
+* Health information.
+* Personal information: SSN/SIN, date of birth, etc.
+* User account/passwords.
+
+### Protection
+* Encrypt data during transport and at rest.
+* Minimize data surface area.
+* Use the latest encrytion algorithms.
+* Disable autocomplete on forms that collect data.
+* Disable caching on forms that collect data.
+
 ## Cross-Site Request Forgery (CSRF)
+CSRFs are typically conducted using malicious social engineering, such as an email or link that tricks the victim into sending a forged request to a server. As the unsuspecting user is authenticated by their application at the time of the attack, it’s impossible to distinguish a legitimate request from a forged one.
+
+### Protection
+* Logging off web applications when not in use
+* Securing usernames and passwords
+* Not allowing browsers to remember passwords
+* Avoiding simultaneously browsing while logged into an application
+
 ## Using Components with Known Vulnerabilities
 Known vulnerabilities are vulnerabilities that were discovered in open source components and published in the NVD, security advisories or issue trackers. 
 From the moment of publication , a vulnerability can be exploited by hackers who find the documentation. According to OWASP, the problem of using components with known vulnerabilities is highly prevalent
