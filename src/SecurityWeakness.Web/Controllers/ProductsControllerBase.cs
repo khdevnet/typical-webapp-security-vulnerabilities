@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SecurityWeakness.Domain.Entities;
 using SecurityWeakness.Domain.Extensibility.Services;
 using SecurityWeakness.Web.Models.Products;
@@ -42,6 +43,7 @@ namespace SecurityWeakness.Web.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public IActionResult DeleteComment(string sku, int productId, int commentId)
         {
             ProductService.DeleteComment(productId, commentId);
